@@ -1,8 +1,7 @@
 # weekend-study-kr
 
 ## Explain
-> weekend-study-kr
-
+> weekend-study-kr는 매주 주말마다 진행하는 스터디입니다.
 ## Replace the content of the template pages
 
 Update the following files to your own content:
