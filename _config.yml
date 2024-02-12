@@ -35,8 +35,7 @@ enable_copy_code_button: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
-    - "https://github.com/weekend-study-kr/weekend-study-kr.github.io"
+  Template Repository: "https://github.com/weekend-study-kr/weekend-study-kr.github.io"
 
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
@@ -48,3 +47,6 @@ gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into t
 
 # Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
 color_scheme: nil
+
+plugins:
+  - jekyll-default-layout
