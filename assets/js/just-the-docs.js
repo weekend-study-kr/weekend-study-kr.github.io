@@ -38,7 +38,7 @@ function initNav() {
   const siteNav = document.getElementById('site-nav');
   const mainHeader = document.getElementById('main-header');
   const menuButton = document.getElementById('menu-button');
-
+  
   disableHeadStyleSheets();
 
   jtd.addEvent(menuButton, 'click', function(e){
@@ -69,19 +69,15 @@ function initNav() {
 }
 
 // The <head> element is assumed to include the following stylesheets:
-// - a <link> to /assets/css/just-the-docs-head-nav.css,
-//             with id 'jtd-head-nav-stylesheet'
-// - a <style> containing the result of _includes/css/activation.scss.liquid.
-// To avoid relying on the order of stylesheets (which can change with HTML
-// compression, user-added JavaScript, and other side effects), stylesheets
-// are only interacted with via ID
+// 0. a <link> to /assets/css/just-the-docs-default.css
+// 1. a <link> to /assets/css/just-the-docs-head-nav.css
+// 2. a <style> containing the result of _includes/css/activation.scss.liquid.
+// It also includes any styles provided by users in _includes/head_custom.html.
+// Stylesheet 2 may be missing (compression can remove empty <style> elements)
+// so disableHeadStyleSheet() needs to access it by its id.
 
 function disableHeadStyleSheets() {
-  const headNav = document.getElementById('jtd-head-nav-stylesheet');
-  if (headNav) {
-    headNav.disabled = true;
-  }
-
+  // document.styleSheets[1].disabled = true;
   const activation = document.getElementById('jtd-nav-activation');
   if (activation) {
     activation.disabled = true;
@@ -102,6 +98,7 @@ function initSearch() {
       lunr.tokenizer.separator = {{ site.search.tokenizer_separator | default: site.search_tokenizer_separator | default: "/[\s\-/]+/" }}
 
       var index = lunr(function(){
+        this.use(lunr.multiLanguage('en', 'ko'));
         this.ref('id');
         this.field('title', { boost: 200 });
         this.field('content', { boost: 2 });
@@ -377,7 +374,7 @@ function searchLoaded(index, docs) {
       {%- if site.search.rel_url != false %}
       var resultRelUrl = document.createElement('span');
       resultRelUrl.classList.add('search-result-rel-url');
-      resultRelUrl.innerText = doc.relUrl;
+      resultRelUrl.innerText = decodeURIComponent(doc.relUrl);
       resultTitle.appendChild(resultRelUrl);
       {%- endif %}
     }
@@ -473,42 +470,25 @@ function searchLoaded(index, docs) {
 
 // Switch theme
 
-jtd.getTheme = function() {
-  var cssFileHref = document.querySelector('[rel="stylesheet"]').getAttribute('href');
-  return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
-}
-
-jtd.setTheme = function(theme) {
-  var cssFile = document.querySelector('[rel="stylesheet"]');
-  cssFile.setAttribute('href', '{{ "assets/css/just-the-docs-" | relative_url }}' + theme + '.css');
-}
+// jtd.getTheme = function() {
+//   var cssFileHref = document.querySelector('[rel="stylesheet"]').getAttribute('href');
+//   return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+// }
+//
+// jtd.setTheme = function(theme) {
+//   var cssFile = document.querySelector('[rel="stylesheet"]');
+//   cssFile.setAttribute('href', '{{ "assets/css/just-the-docs-" | relative_url }}' + theme + '.css');
+// }
 
 // Note: pathname can have a trailing slash on a local jekyll server
 // and not have the slash on GitHub Pages
 
 function navLink() {
-  var pathname = document.location.pathname;
-  
-  var navLink = document.getElementById('site-nav').querySelector('a[href="' + pathname + '"]');
-  if (navLink) {
-    return navLink;
+  var href = document.location.pathname;
+  if (href.endsWith('/') && href != '/') {
+    href = href.slice(0, -1);
   }
-
-  // The `permalink` setting may produce navigation links whose `href` ends with `/` or `.html`.
-  // To find these links when `/` is omitted from or added to pathname, or `.html` is omitted:
-
-  if (pathname.endsWith('/') && pathname != '/') {
-    pathname = pathname.slice(0, -1);
-  }
-
-  if (pathname != '/') {
-    navLink = document.getElementById('site-nav').querySelector('a[href="' + pathname + '"], a[href="' + pathname + '/"], a[href="' + pathname + '.html"]');
-    if (navLink) {
-      return navLink;
-    }
-  }
-
-  return null; // avoids `undefined`
+  return document.getElementById('site-nav').querySelector('a[href="' + href + '"], a[href="' + href + '/"]');
 }
 
 // Scroll site-nav to ensure the link to the current page is visible
@@ -516,7 +496,8 @@ function navLink() {
 function scrollNav() {
   const targetLink = navLink();
   if (targetLink) {
-    targetLink.scrollIntoView({ block: "center" });
+    const rect = targetLink.getBoundingClientRect();
+    document.getElementById('site-nav').scrollBy(0, rect.top - 3*rect.height);
     targetLink.removeAttribute('href');
   }
 }
@@ -540,6 +521,42 @@ function activateNav() {
   }
 }
 
+function darkMode() {
+  const toggleDarkMode = document.getElementById("theme-toggle")
+
+  if (localStorage.getItem("theme") === "dark") {
+    setTheme("dark")
+  } else {
+    setTheme("light")
+  }
+
+  jtd.addEvent(toggleDarkMode, "click", function() {
+    const currentTheme = getTheme()
+    const newTheme = currentTheme === "dark" ? "light" : "dark"
+
+    localStorage.setItem("theme", newTheme)
+    setTheme(newTheme)
+  })
+
+  function getTheme() {
+    return document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
+  }
+
+  function setTheme(theme = "light") {
+    if (theme === "dark") {
+      toggleDarkMode.innerHTML = `<svg width="18px" height="18px"><use href="#svg-moon"></use></svg>`
+      document.documentElement.classList.add("dark-mode")
+      document.documentElement.classList.remove("light-mode")
+    } else {
+      toggleDarkMode.innerHTML = `<svg width="18px" height="18px"><use href="#svg-sun"></use></svg>`
+      document.documentElement.classList.add("light-mode")
+      document.documentElement.classList.remove("dark-mode")
+    }
+    const cssFile = document.querySelector("[id=\"main-css\"]")
+    cssFile.setAttribute("href", "/assets/css/just-the-docs-" + theme + ".css")
+  }
+}
+
 // Document ready
 
 jtd.onReady(function(){
@@ -549,6 +566,7 @@ jtd.onReady(function(){
   {%- endif %}
   activateNav();
   scrollNav();
+  darkMode();
 });
 
 // Copy button on code
