@@ -1,11 +1,11 @@
 ---
 layout: default
-title: project
+title: 프로젝트
 has_children: true
 published_date: 2024-02-14
 last_modified_date: 2024-02-14
 nav_order: 1
-permalink: /project
+permalink: '1'
 ---
 # 테스트
 
