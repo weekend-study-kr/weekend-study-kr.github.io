@@ -5,7 +5,7 @@ has_children: true
 published_date: 2024-02-14
 last_modified_date: 2024-02-14
 nav_order: 1
-permalink: /테스트
+permalink: test
 ---
 # 테스트
 
