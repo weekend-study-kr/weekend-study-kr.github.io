@@ -22,6 +22,7 @@ layout: table_wrappers
           {% if page.has_children == false and page.published_date != nil %}
           작성일: {{ page.published_date }}
           {% endif %}
+          {% include readtime_post.html %}
           <br />
           {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16
             16\" aria-hidden=\"true\">
