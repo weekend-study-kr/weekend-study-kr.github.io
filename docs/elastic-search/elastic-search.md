@@ -4,7 +4,7 @@ title: elastic-search
 has_children: true
 published_date: 2024-02-14
 last_modified_date: 2024-02-14
-nav_order: 1
+nav_order: 2
 permalink: '1'
 ---
 # elastic-search
