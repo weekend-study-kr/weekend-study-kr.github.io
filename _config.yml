@@ -91,7 +91,7 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "GitHub":
-    - "https://github.com/eeeasycpde"
+    - "https://github.com/eeeasycode"
     
 
 # Makes Aux links open in a new tab. Default is false
