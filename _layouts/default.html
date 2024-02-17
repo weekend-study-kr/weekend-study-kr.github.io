@@ -1,72 +1,207 @@
 ---
-layout: table_wrappers
+layout: default
+disqus: false
+archive: false
+post_class: -templatepost
 ---
 
-<!DOCTYPE html>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+  <div class="row">
 
-<html lang="{{ site.lang | default: 'ko-KR' }}">
-{% include head.html %}
-
-<body>
-  <a class="skip-to-main" href="#main-content">Skip to main content</a>
-  {% include icons/icons.html %}
-  {% include components/sidebar.html %}
-  <div class="main" id="top">
-    {% include components/header.html %}
-    <div class="main-content-wrap">
-      {% include components/breadcrumbs.html %}
-      <div id="main-content" class="main-content">
-        <main>
-          {% if site.heading_anchors != false %}
-          <h1><strong>{{ page.title }}</strong></h1>
-          {% if page.has_children == false and page.published_date != nil %}
-          작성일: {{ page.published_date }}
-          {% endif %}
-          <br />
-          {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16
-            16\" aria-hidden=\"true\">
-            <use xlink:href=\"#svg-link\"></use>
-          </svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
-          {% else %}
-          <h1><strong>{{ page.title }}</strong></h1>
-          {% if page.has_children == false and page.published_date != nil %}
-          작성일: {{ page.published_date }}
-          {% endif %}
-          {{ content }}
-          {% endif %}
-
-          {% if page.has_children == true and page.has_toc != false %}
-          {% include components/children_nav.html %}
-          {% endif %}
-
-          {% if page.has_children == false %}
-          {% include components/prev_next.html
-          include_parent=page.parent
-          include_grand_parent=page.grand_parent
-          include_nav_order=page.nav_order
-          %}
-          {% endif %}
-
-          {% if page.has_children == false %}
-          <script src="https://giscus.app/client.js" data-repo="devshjeon/devshjeon.github.io"
-            data-repo-id="R_kgDOJ0EQOQ" data-category="General" data-category-id="DIC_kwDOJ0EQOc4CaQfX"
-            data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
-            data-input-position="bottom" data-theme="light" data-lang="ko" data-loading="lazy" crossorigin="anonymous"
-            async>
-            </script>
-          {% endif %}
-        </main>
-        {% include components/footer.html %}
-      </div>
+    <!-- Post Share -->
+    <div class="col-md-2 pl-0">
+      {% include share.html %}
     </div>
-    {% if site.search_enabled != false %}
-    {% include components/search_footer.html %}
-    {% endif %}
+
+    <!-- Post -->
+    {% assign author = site.authors[page.author] %}
+
+    <div class="col-md-9 flex-first flex-md-unordered">
+      <div class="mainheading">
+
+        <!-- Post Categories -->
+        <div class="after-post-cats">
+          <ul class="tags mb-4">
+            {%if page.categories != null %}
+            <i class="fas fa-fw fa-folder-open" aria-hidden="true" style="font-size: large"></i>
+            {% assign sortedCategories = page.categories | sort %}
+            {% for category in sortedCategories %}
+            <li>
+              <a class="smoothscroll" href="{{site.baseurl}}/{{ category | replace: " "," -" }}">{{ category }}</a>
+            </li>
+            {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+        <!-- End Categories -->
+
+        <!-- Post Title -->
+        <h1 class="posttitle">{{ page.title }}</h1>
+
+        <!-- Post Date -->
+        <p>
+          <medium>
+            <span class="post-date"><time class="post-date" datetime="{{ page.date | date:" %Y-%m-%d" }}">{{ page.date |
+                date_to_string }}</time></span>
+            {% if page.last_modified_at %}
+            (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{
+              page.last_modified_at | date: "%b %-d, %Y" }}</time>)
+            {% endif %}
+            {% include readtime_post.html %}
+          </medium>
+        </p>
+      </div>
+      <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+      <!-- {% if site.adsense == "enabled" %}
+      {% include adsense-under-header.html %}
+      {% endif %} -->
+      <!-- End Adsense -->
+
+      <!-- Post Featured Image
+            {% if page.image %}
+
+            {% if site.lazyimages == "enabled" %}
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
+            {% else %}
+            <img class="featured-image img-fluid" src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
+            {% endif %}
+
+            {% endif %}
+            End Featured Image -->
+
+      <!-- Post Content -->
+      <div class="article-post">
+        <!-- Toc if any -->
+        {% if page.toc %}
+        {% if page.beforetoc %}
+        <p><em>{{page.beforetoc}}</em></p>
+        {% endif %}
+        <div class="toc mt-4 mb-4 lead">
+          <h3 class="font-weight-bold">Summary</h3>
+          {% include toc.html html=content %}
+        </div>
+        {% endif %}
+        <!-- End Toc -->
+        {{content}}
+      </div>
+
+      <!-- Rating -->
+      <!-- {% if page.rating %}
+      <div class="rating mb-4 d-flex align-items-center">
+        <strong class="mr-1">Rating:</strong> {% include star_rating.html %}
+      </div>
+      {% endif %} -->
+
+      <!-- Post Tags -->
+      <!-- </br>
+            <div class="after-post-tags">
+                <ul class="tags">
+                    {%if page.tags != null %}
+                    <i class="fas fa-fw fa-tags" aria-hidden="true" style="font-size: large"></i>
+                    {% assign sortedTags = page.tags | sort %}
+                    {% for tag in sortedTags %}
+                    <li>
+                        <a class="smoothscroll" href="{{site.baseurl}}/search/?tag={{ tag | replace: " ","-" }}">#{{ tag }}</a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div> -->
+      <!-- End Tags -->
+
+      <!-- Prev/Next -->
+      <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+
+        <div class="next d-block col-md-6 text-lg-right">
+          {% if page.previous.url %}
+          <div style="text-align: left; padding:0px 0px 10px 15px; ">
+            이전 글
+          </div>
+          <div style="text-align: left; ">
+            <a href="{{ site.baseurl }}{{page.previous.url}}"> &laquo; {{page.previous.title}}</a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="next d-block col-md-6 text-lg-right">
+          {% if page.next.url %}
+          <div style="text-align: right;padding:0px 15px 10px 0px;">
+            다음 글
+          </div>
+          <div style="text-align: right; ">
+            <a href="{{ site.baseurl }}{{page.next.url}}">{{page.next.title}} &raquo; </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <!-- Author Box -->
+      </br>
+      {% if page.author %}
+      <div class="row post-top-meta">
+        <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0" style="padding-right:0px">
+          {% if author.avatar %}
+          <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
+          {% else %}
+          <img class="author-thumb" src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x"
+            alt="{{ author.display_name }}">
+          {% endif %}
+        </div>
+        <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left" style="padding-left:0px">
+          <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a>
+          {% if author.instagram %}<a target="_blank" href="{{ author.instagram }}" class="btn follow">Follow</a>{%
+          endif %}
+          <span class="author-description">{{ author.description }}</span>
+        </div>
+      </div>
+      {% endif %}
+      <!-- End Author Box -->
+    </div>
+    <!-- End Post -->
+
   </div>
+</div>
+<!-- End Article
+================================================== -->
 
-  <!--  {% if site.mermaid %}-->
-  <!--    {% include components/mermaid.html %}-->
-  <!--  {% endif %}-->
-</body>
+<!-- Begin Comments
+================================================== -->
+{% if page.comments != false %}
+<div class="container">
+  <div id="comments" class="row justify-content-center mb-5">
+    <div class="col-md-10">
+      {% include disqus.html %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<!--End Comments
+================================================== -->
 
-</html>
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+{% if page.rating %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Thing",
+    "name": "{{ page.title }}"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "{{ author.display_name }}"
+  },
+  "datePublished": "{{ page.date | date:"%Y-%m-%d" }}",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "{{ page.rating }}",
+    "bestRating": "5"
+  }
+}
+</script>
+{% endif %}
