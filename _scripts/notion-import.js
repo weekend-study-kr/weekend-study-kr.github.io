@@ -90,7 +90,7 @@ nav_order: ${navOrder}`
       if (upFolder) {
         header += `
 parent: ${upUpFolder}`
-      }
+      } 
     } else if (!hasChild && upFolder) {
       header += `
 grand_parent: ${upUpFolder}`
