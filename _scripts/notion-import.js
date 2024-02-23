@@ -13,7 +13,7 @@ console.log(notion)
 console.log(process.env.NOTION_TOKEN)
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
-console.log('hi')
+
 (async () => {
   // ensure directory exists
   const root = `docs`
