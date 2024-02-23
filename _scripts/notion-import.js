@@ -9,12 +9,7 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
-function escapeCodeBlock(body) {
-  const regex = /```([\s\S]*?)```/g
-  return body.replace(regex, function(match, htmlBlock) {
-    return "{% raw %}\n```" + htmlBlock + "```\n{% endraw %}"
-  })
-}
+
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
@@ -118,8 +113,6 @@ permalink: '${pk}'
     const mdBlocks = await n2m.pageToMarkdown(id)
     let body = n2m.toMarkdownString(mdBlocks)["parent"]
 
-    // code block escape
-    body = escapeCodeBlock(body)
 
     //writing to file
     const fTitle = `${pk}.md`
