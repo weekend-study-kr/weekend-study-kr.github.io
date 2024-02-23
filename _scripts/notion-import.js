@@ -73,7 +73,6 @@ layout: default`
 layout: post`        
     }
     header += `
-layout: default
 title: ${title}
 has_children: ${hasChild}
 published_date: ${date}`
@@ -88,13 +87,16 @@ nav_order: ${navOrder}`
         header += `
 parent: ${upUpFolder}`
       }
-    } else {
+    } else if (!hasChild && upFolder) {
       header += `
 grand_parent: ${upUpFolder}`
       if (upFolder) {
         header += `
 parent: ${upFolder}`
       }
+    } else (!hasChild && !upFolder) {
+      header += `
+parent: ${upUpFolder}`
     }
     header += `
 ---`
