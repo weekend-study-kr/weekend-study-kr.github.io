@@ -9,15 +9,15 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
-
+console.log(notion)
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 (async () => {
   // ensure directory exists
   const root = `docs`
-
   const databaseId = process.env.DATABASE_ID
+  console.log(databaseId)
   const response = await notion.databases.query({
     database_id: databaseId,
     filter: {
