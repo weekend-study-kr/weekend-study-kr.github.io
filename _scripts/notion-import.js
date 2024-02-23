@@ -66,8 +66,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     // 작성일
     let date = moment(r.created_time).tz("Asia/Seoul").format("YYYY-MM-DD HH:mm")
 
-    let header = `---
-`
+    let header = `---`
 
     if (hasChild) {
         header += `
