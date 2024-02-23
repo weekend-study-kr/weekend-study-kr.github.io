@@ -103,7 +103,7 @@ parent: ${upFolder}`
 parent: ${upUpFolder}`
     }
     header += `
-permalink: ${permalink}
+permalink: ${String(permalink)}
 ---`
 
     const folderPath = upFolder ? `${root}/${upUpFolder}/${upFolder}` : `${root}/${upUpFolder}`
