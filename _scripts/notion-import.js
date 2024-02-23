@@ -8,11 +8,9 @@ const fs = require("fs")
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
-
+console.log(notion.databases)
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
-
-console.log(n2m)
 
 (async () => {
   // ensure directory exists
