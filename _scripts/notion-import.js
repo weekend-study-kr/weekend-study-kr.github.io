@@ -94,7 +94,7 @@ grand_parent: ${upUpFolder}`
         header += `
 parent: ${upFolder}`
       }
-    } else (!hasChild && !upFolder) {
+    } else if (!hasChild && !upFolder) {
       header += `
 parent: ${upUpFolder}`
     }
