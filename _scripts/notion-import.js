@@ -8,14 +8,14 @@ const fs = require("fs")
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
-console.log(notion.databases)
+
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 (async () => {
   // ensure directory exists
   const root = `docs`
-  const databaseId = process.env.DATABASE_ID
+  const databaseId = "https://www.notion.so/eeeasycode/88b3d8881b99427fbf394b9e6d409438?v=d7adf5dcfbe544879844de670e4bd32f&pvs=4"
   const response = await notion.databases.query({
     database_id: databaseId,
     filter: {
