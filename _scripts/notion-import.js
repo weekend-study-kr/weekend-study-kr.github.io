@@ -104,7 +104,6 @@ parent: ${upUpFolder}`
     header += `
 permalink: '${permalink}'
 ---
-
 `
 
     const folderPath = upFolder ? `${root}/${upUpFolder}/${upFolder}` : `${root}/${upUpFolder}`
