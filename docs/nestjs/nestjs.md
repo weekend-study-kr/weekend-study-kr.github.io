@@ -5,7 +5,7 @@ has_children: true
 published_date: 2024-02-23
 last_modified_date: 2024-02-23
 nav_order: 2
-permalink: '4'
+permalink: '7'
 ---
 # nestJS
 
