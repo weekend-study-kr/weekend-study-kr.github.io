@@ -21,7 +21,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     filter: {
       "and": [
         {
-          property: "공개",
+          property: "배포",
           checkbox: {
             equals: true,
           },
