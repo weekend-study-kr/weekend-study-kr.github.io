@@ -46,7 +46,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update Importer posts
-          branch: local
+          branch: main
           commit_user_name: importer-bot 🤖
           commit_user_email: eeeasycode@gmail.com
           commit_author: importer-bot 🤖 <eeeasycode@github.com>
