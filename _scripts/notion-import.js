@@ -6,7 +6,7 @@ const path = require("path")
 const fs = require("fs")
 
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: 'secret_EzderqlaHr9V05lfGQuGCkIPj4ckCBl1t8ezTximBpw',
 })
 
 console.log(notion)
