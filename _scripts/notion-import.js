@@ -9,6 +9,12 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
+function escapeCodeBlock(body) {
+  const regex = /```([\s\S]*?)```/g
+  return body.replace(regex, function(match, htmlBlock) {
+    return "{% raw %}\n```" + htmlBlock + "```\n{% endraw %}"
+  })
+}
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
@@ -18,19 +24,15 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
   const databaseId = process.env.DATABASE_ID
   const response = await notion.databases.query({
     database_id: databaseId,
-    filter: {
-      "and": [
-        {
-          property: "배포",
-          checkbox: {
-            equals: true,
-          },
-        },
-      ],
-    },
   })
+
   for (const r of response.results) {
     const id = r.id
+    let pk = r.properties?.["ID"]?.["unique_id"]?.["number"]
+
+    let isPublished = r.properties?.["배포"]?.["checkbox"] || false
+    let modifiedDate = moment(r.last_edited_time).tz("Asia/Seoul").format("YYYY-MM-DD")
+
     let permalink = ""
     let pPermalink = r.properties["permalink"]?.["rich_text"]
     if (pPermalink) {
@@ -43,6 +45,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
       upUpFolder = pUpUpFolder[0]?.["plain_text"]
     }
 
+    if (isPublished) {
+
+    }
     // 상위폴더
     let upFolder = ""
     let pUpFolder = r.properties?.["상위폴더"]?.["rich_text"]
@@ -64,7 +69,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     let hasChild = r.properties?.["메인"]?.["checkbox"] || false
 
     // 작성일
-    let date = moment(r.created_time).tz("Asia/Seoul").format("YYYY-MM-DD HH:mm")
+    let publishedDate = moment(r.created_time).tz("Asia/Seoul").format("YYYY-MM-DD")
 
     let header = `---`
 
@@ -78,7 +83,8 @@ layout: post`
     header += `
 title: ${title}
 has_children: ${hasChild}
-published_date: ${date}`
+published_date: ${publishedDate}
+last_modified_date: ${modifiedDate}`
 
     if (navOrder) {
       header += `
@@ -102,7 +108,7 @@ parent: ${upFolder}`
 parent: ${upUpFolder}`
     }
     header += `
-permalink: '${permalink}'
+permalink: '${pk}'
 ---
 `
 
@@ -112,9 +118,11 @@ permalink: '${permalink}'
     const mdBlocks = await n2m.pageToMarkdown(id)
     let body = n2m.toMarkdownString(mdBlocks)["parent"]
 
+    // code block escape
+    body = escapeCodeBlock(body)
 
     //writing to file
-    const fTitle = `${title}.md`
+    const fTitle = `${pk}.md`
     fs.writeFile(path.join(folderPath, fTitle), header + body, (err) => {
       if (err) {
         console.log(err)
