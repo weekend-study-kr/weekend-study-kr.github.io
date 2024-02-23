@@ -51,6 +51,6 @@ jobs:
           commit_user_email: eeeasycode@gmail.com
           commit_author: importer-bot 🤖 <eeeasycode@github.com>
 
-      - run: gh api /repos/weekend-study-kr/weekend-study-kr/dispatches -f event_type='RUN_WORKFLOW_DISPATCH_NEXT'
+      - run: gh api /repos/weekend-study-kr/weekend-study-kr.github.io/dispatches -f event_type='RUN_WORKFLOW_DISPATCH_NEXT'
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
