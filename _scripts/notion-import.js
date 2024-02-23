@@ -32,7 +32,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
   for (const r of response.results) {
     const id = r.id
 
-    // 최상위폴더
+    // 최상위폴더(grand)
     let upUpFolder = ""
     let pUpUpFolder = r.properties?.["최상위폴더"]?.["rich_text"]
     if (pUpUpFolder) {
@@ -63,10 +63,20 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     let date = moment(r.created_time).tz("Asia/Seoul").format("YYYY-MM-DD HH:mm")
 
     let header = `---
+`
+
+    if (hasChild) {
+        header += `
+layout: default`        
+    } else {
+        header += `
+layout: post`        
+    }
+    header += `
 layout: default
 title: ${title}
 has_children: ${hasChild}
-last_modified_date: ${date}`
+published_date: ${date}`
 
     if (navOrder) {
       header += `
