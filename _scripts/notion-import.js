@@ -31,11 +31,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
   })
   for (const r of response.results) {
     const id = r.id
-
-    const permalink = r.properties["permalink"].["rich_text"]
+    let permalink = ""
+    let pPermalink = r.properties["permalink"]?.["rich_text"]
+    if (pPermalink) {
+      permalink = pPermalink[0]?.["plain_text"]
+    }
     // 최상위폴더(grand)
     let upUpFolder = ""
-    let pUpUpFolder = r.properties?.["최상위폴더"]?.["rich_text"][0].["plain_text"]
+    let pUpUpFolder = r.properties?.["최상위폴더"]?.["rich_text"]
     if (pUpUpFolder) {
       upUpFolder = pUpUpFolder[0]?.["plain_text"]
     }
