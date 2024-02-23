@@ -32,9 +32,10 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
   for (const r of response.results) {
     const id = r.id
 
+    const permalink = r.properties["permalink"].["rich_text"]
     // 최상위폴더(grand)
     let upUpFolder = ""
-    let pUpUpFolder = r.properties?.["최상위폴더"]?.["rich_text"]
+    let pUpUpFolder = r.properties?.["최상위폴더"]?.["rich_text"][0].["plain_text"]
     if (pUpUpFolder) {
       upUpFolder = pUpUpFolder[0]?.["plain_text"]
     }
@@ -99,6 +100,7 @@ parent: ${upFolder}`
 parent: ${upUpFolder}`
     }
     header += `
+permalink: ${permalink}
 ---`
 
     const folderPath = upFolder ? `${root}/${upUpFolder}/${upFolder}` : `${root}/${upUpFolder}`
