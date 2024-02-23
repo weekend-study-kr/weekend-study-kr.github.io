@@ -6,13 +6,13 @@ const path = require("path")
 const fs = require("fs")
 
 const notion = new Client({
-  auth: 'secret_EzderqlaHr9V05lfGQuGCkIPj4ckCBl1t8ezTximBpw',
+  auth: process.env.NOTION_TOKEN,
 })
 
-console.log(notion)
-console.log(process.env.NOTION_TOKEN)
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
+
+console.log(n2m)
 
 (async () => {
   // ensure directory exists
