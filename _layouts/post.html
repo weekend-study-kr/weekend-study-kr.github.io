@@ -40,11 +40,10 @@ layout: table_wrappers
                     작성일: {{ page.published_date }}
                     {% endif %}
                     <br />
-                    {% if page.has_toc != false %}
-                    <nav id="nav-sidebar" class="hidden-print hidden-xs hidden-sm affix bs-docs-sidebar">
-                        {% include toc.html id='sidebar' class='nav.nav-stacked' item_class='toc_li' html=content %}
-                    </nav>
-                    {% endif %}
+                    {% endcapture %} {% assign text = markdown | markdownify %}
+
+                    {% capture itemClass %}toc-entry.toc-h%level%{% endcapture %} {% include toc.html html=text
+                    class="ul-level-class" item_class=itemClass %}
                     {{ content }}
                     {% endif %}
 
