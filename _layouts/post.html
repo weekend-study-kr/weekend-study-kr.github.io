@@ -28,41 +28,46 @@ layout: table_wrappers
                     {% if page.has_children == false and page.published_date != nil %}
                     작성일: {{ page.published_date }}
                     {% endif %}
-                    {% include readtime_post.html %}
-                    <br />
-                    {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg
-                        viewBox=\"0 0 16 16\" aria-hidden=\"true\">
-                        <use xlink:href=\"#svg-link\"></use>
-                    </svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
-                    {% else %}
-                    <h1><strong>{{ page.title }}</strong></h1>
-                    {% if page.has_children == false and page.published_date != nil %}
-                    작성일: {{ page.published_date }}
-                    {% endif %}
-                    <br />
-                    {{ content }}
-                    {% endif %}
+                    {% assign words = content | number_of_words %}
+                    {% if words < 360 %} <span class="reading-time">1 min read</span>
+                        {% else %}
+                        <span class="reading-time">{{ words | divided_by:180 }} mins read</span>
+                        {% endif %}
+                        <br />
+                        {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg
+                            viewBox=\"0 0 16 16\" aria-hidden=\"true\">
+                            <use xlink:href=\"#svg-link\"></use>
+                        </svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
+                        {% else %}
+                        <h1><strong>{{ page.title }}</strong></h1>
+                        {% if page.has_children == false and page.published_date != nil %}
+                        작성일: {{ page.published_date }}
+                        {% endif %}
+                        <br />
+                        {{ content }}
+                        {% endif %}
 
-                    {% if page.has_children == true and page.has_toc != false %}
-                    {% include components/children_nav.html %}
-                    {% endif %}
+                        {% if page.has_children == true and page.has_toc != false %}
+                        {% include components/children_nav.html %}
+                        {% endif %}
 
-                    {% if page.has_children == false %}
-                    {% include components/prev_next.html
-                    include_parent=page.parent
-                    include_grand_parent=page.grand_parent
-                    include_nav_order=page.nav_order
-                    %}
-                    {% endif %}
+                        {% if page.has_children == false %}
+                        {% include components/prev_next.html
+                        include_parent=page.parent
+                        include_grand_parent=page.grand_parent
+                        include_nav_order=page.nav_order
+                        %}
+                        {% endif %}
 
-                    {% if page.has_children == false %}
-                    <script src="https://giscus.app/client.js" data-repo="weekend-study-kr/weekend-study-kr.github.io"
-                        data-repo-id="R_kgDOJ0EQOQ" data-category="General" data-category-id="DIC_kwDOJ0EQOc4CaQfX"
-                        data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
-                        data-input-position="bottom" data-theme="light" data-lang="ko" data-loading="lazy"
-                        crossorigin="anonymous" async>
-                        </script>
-                    {% endif %}
+                        {% if page.has_children == false %}
+                        <script src="https://giscus.app/client.js"
+                            data-repo="weekend-study-kr/weekend-study-kr.github.io" data-repo-id="R_kgDOJ0EQOQ"
+                            data-category="General" data-category-id="DIC_kwDOJ0EQOc4CaQfX" data-mapping="title"
+                            data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
+                            data-input-position="bottom" data-theme="light" data-lang="ko" data-loading="lazy"
+                            crossorigin="anonymous" async>
+                            </script>
+                        {% endif %}
                 </main>
                 {% include components/footer.html %}
             </div>
