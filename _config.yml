@@ -93,6 +93,7 @@ aux_links:
   "GitHub":
     - "https://github.com/eeeasycode"
     
+enable_toc: true
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
