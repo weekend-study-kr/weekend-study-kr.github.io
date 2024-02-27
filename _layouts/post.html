@@ -44,6 +44,9 @@ layout: table_wrappers
                         작성일: {{ page.published_date }}
                         {% endif %}
                         <br />
+                        <aside>
+                            {% include toc.html html=content %}
+                        </aside>
                         {{ content }}
                         {% endif %}
 
