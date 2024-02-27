@@ -40,9 +40,7 @@ layout: table_wrappers
                     작성일: {{ page.published_date }}
                     {% endif %}
                     <br />
-                    {% include toc.html html=content %}
-
-
+                    {{ content }}
                     {% endif %}
 
                     {% if page.has_children == true and page.has_toc != false %}
