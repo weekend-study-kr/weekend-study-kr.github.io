@@ -111,3 +111,56 @@ blockquote {
   padding-left: 1rem;
   border-left: 3px solid $border-color;
 }
+
+.toc {
+  position: fixed;
+  top: 100px; /* 예시로 50px만큼 위로 이동 */
+  right: 30px; /* 오른쪽으로 20px 이동 */
+  width: 240px;
+  color: $body-heading-color;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  border-left: 2px solid #e0d9e7;
+  z-index: 1000; /* Ensure it appears above other content */
+
+  display: none;
+  @media (min-width: 75em){
+    width: 240px;
+    display: block;
+  }
+  @media (min-width: 85em){
+    width: 300px;
+    display: block;
+  }
+  @media (min-width: 95em){
+    width: 360px;
+    display: block;
+  }
+
+  a.toc-active {
+    font-weight: bold; 
+    transition: all 0.125s ease-in 0s; 
+    font-size: 0.75rem;
+    color: #9075aa;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-bottom: 0.1rem;
+    padding-left: 0rem;
+    li {
+      padding-left: .5rem;
+    }
+  }
+
+  a {
+      color: $link-color;
+      text-decoration: none;
+  }
+ 
+  a:hover {
+     color:$link-color;
+  }
+}

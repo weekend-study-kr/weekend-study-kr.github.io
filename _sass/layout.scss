@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   background-color: $sidebar-color;
-
+  
   @include mq(md) {
     flex-flow: column nowrap;
     position: fixed;
@@ -13,11 +13,13 @@
     height: 100%;
     border-right: $border $border-color;
     align-items: flex-end;
+    margin-left: -20px; /* 왼쪽으로 20px 이동 */
   }
 
   @include mq(lg) {
     width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
     min-width: $nav-width;
+    margin-left: -120px; /* 왼쪽으로 20px 이동 */
   }
 }
 
@@ -33,7 +35,7 @@
     // disable for Max(), we want to use the CSS max() function
     margin-left: Max(
       #{$nav-width},
-      calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width})
+      calc((85% - #{$nav-width + $content-width}) / 2 + #{$nav-width})
     );
     // stylelint-enable function-name-case
   }
