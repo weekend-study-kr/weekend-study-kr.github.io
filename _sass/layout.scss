@@ -13,13 +13,11 @@
     height: 100%;
     border-right: $border $border-color;
     align-items: flex-end;
-    margin-left: -20px; /* 왼쪽으로 20px 이동 */
   }
 
   @include mq(lg) {
     width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
     min-width: $nav-width;
-    margin-left: -120px; /* 왼쪽으로 20px 이동 */
   }
 }
 
