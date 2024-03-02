@@ -4,6 +4,7 @@ name: Deploy Jekyll site to Pages
 on:
   repository_dispatch:
     types: [ RUN_WORKFLOW_DISPATCH_NEXT ]
+  workflow_dispatch:
 
   # Allows you to run this workflow manually from the Actions tab
 #  workflow_dispatch:
