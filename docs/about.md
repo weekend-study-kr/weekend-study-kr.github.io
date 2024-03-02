@@ -1,7 +1,6 @@
 ---
 layout: default
-title: AboutMe
-has_children: false
+title: About Me
 permalink: 'about'
 ---
 
