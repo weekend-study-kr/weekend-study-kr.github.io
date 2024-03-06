@@ -87,16 +87,15 @@ nav_order: ${navOrder}`
     }
 
     if (hasChild) {
-      if (upUpFolder) {
+      if (upFolder) {
         header += `
 grand_parent: ${upUpFolder}
 parent: ${upFolder}`
-      }
-      else if (upFolder) {
+      } else {
         header += `
-parent: ${upUpFolder}`
+grand_parent: ${upUpFolder}`
       } 
-    } else if (!hasChild && !upFolder) {
+    } else {
       header += `
 parent: ${upUpFolder}`
     }
