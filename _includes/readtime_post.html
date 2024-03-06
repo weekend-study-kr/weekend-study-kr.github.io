@@ -1,4 +1,3 @@
-<span class="reading-time post-date" title="Estimated read time">
+<span class="reading-time post-date" title="Estimated read time"> ·
   {% assign words = page.content | number_of_words %}
-  { console.log(words) }
   {% if words < 360 %} 1 min {% else %} {{ words | divided_by:180 }} mins read {% endif %} </span>
