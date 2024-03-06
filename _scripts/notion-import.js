@@ -41,9 +41,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     }
 
     if (isPublished) {
-
-    }
-    // 상위폴더
+      // 상위폴더
     let upFolder = ""
     let pUpFolder = r.properties?.["상위폴더"]?.["rich_text"]
     if (pUpFolder) {
@@ -117,6 +115,7 @@ permalink: '${pk}'
       if (err) {
         console.log(err)
       }
-    })
+    })  
+    }
   }
 })()
