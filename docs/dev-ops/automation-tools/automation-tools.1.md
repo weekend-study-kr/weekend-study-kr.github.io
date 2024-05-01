@@ -5,8 +5,9 @@ has_children: false
 published_date: 2024-02-27
 last_modified_date: 2024-02-27
 nav_order: 1
-parent: automation-tools
-permalink: '4'
+grand_parent: DevOps
+parent: automation tools
+permalink: dev-ops/automation-tools/1
 ---
 
 ## Tech Environment

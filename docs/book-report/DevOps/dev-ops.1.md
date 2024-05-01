@@ -4,9 +4,10 @@ title: "1장: 문제 해결 우수사례"
 has_children: false
 published_date: 2024-03-04
 last_modified_date: 2024-03-06
-nav_order: 3
+nav_order: 1
+grand_parent: book report
 parent: DevOps
-permalink: '6'
+permalink: book-report/dev-ops/1
 ---
 
 # 시작하며

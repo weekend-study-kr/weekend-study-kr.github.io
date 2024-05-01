@@ -4,9 +4,9 @@ title: DevOps
 has_children: true
 published_date: 2024-02-27
 last_modified_date: 2024-03-04
-nav_order: 2
-grand_parent: DevOps
-permalink: '5'
+nav_order: 1
+parent: book report
+permalink: book-report/dev-ops
 ---
 
 # 데브옵스
