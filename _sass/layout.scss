@@ -5,18 +5,20 @@
   display: flex;
   flex-wrap: wrap;
   background-color: $sidebar-color;
-  
+
   @include mq(md) {
     flex-flow: column nowrap;
     position: fixed;
-    width: $nav-width-md;
+    margin-right: auto; // 오른쪽 여백을 자동으로 설정
+    width: $nav-width-md; // 중간 크기의 너비 설정
     height: 100%;
     border-right: $border $border-color;
     align-items: flex-end;
   }
 
   @include mq(lg) {
-    width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
+    margin-right: auto; // 오른쪽 여백을 자동으로 설정
+    width: $nav-width; // 큰 크기의 너비 설정
     min-width: $nav-width;
   }
 }
