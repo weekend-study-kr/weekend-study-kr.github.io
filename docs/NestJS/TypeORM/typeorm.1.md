@@ -2,6 +2,7 @@
 layout: post
 title: 연관관계 없이 join
 has_children: false
+has_toc: true
 published_date: 2024-05-12
 last_modified_date: 2024-05-12
 nav_order: 1
@@ -12,14 +13,16 @@ permalink: nestjs/type-orm/1
 
 # Feature
 
-typeorm에서 연관관계가 없는 테이블 간 join 하는 방법
+typeORM에서 연관관계가 없는 테이블 간 join 하는 방법
 
 ## Tables
 
-User 테이블
+### User 테이블
+
 <img width="1166" alt="User 테이블" src="../../../assets/images/user_table.png">
 
-Payment 테이블
+### Payment 테이블
+
 <img width="1179" alt="Payment 테이블" src="../../../assets/images/payment_table.png">
 
 각 테이블은 연관관계를 설정하지 않았고, payment 테이블에서 userId를 저장할 수 있게 했습니다.

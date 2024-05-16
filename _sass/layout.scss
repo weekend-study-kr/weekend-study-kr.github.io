@@ -31,7 +31,7 @@
   }
 
   @include mq(lg) {
-    max-width: 100rem;
+    max-width: 80rem;
     // stylelint-disable function-name-case
     // disable for Max(), we want to use the CSS max() function
     margin-left: Max(
@@ -212,33 +212,8 @@ body {
   color: $link-color;
 }
 
-giscus-frame {
+.giscus-frame {
   background-color: white;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.toc {
-  position: fixed;
-  top: 25rem;
-  right: 15rem;
-  width: 200px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.toc a {
-  display: block;
-  padding: 5px 0;
-  color: #333;
-  text-decoration: none;
-}
-
-.toc a:hover {
-  background-color: #e8e8e8;
 }

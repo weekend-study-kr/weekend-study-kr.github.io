@@ -111,3 +111,45 @@ blockquote {
   padding-left: 1rem;
   border-left: 3px solid $border-color;
 }
+
+/* 목차 컨테이너 스타일 */
+#toc {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: fixed;
+  right: 10rem;
+  top: 20rem;
+  width: 250px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+/* 목차 항목 스타일 */
+.toc-entry {
+  margin-bottom: 10px;
+}
+
+/* 목차 링크 스타일 */
+.toc-entry a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+/* 목차 링크 호버 및 활성화 스타일 */
+.toc-entry a:hover,
+.toc-entry a.active {
+  background-color: #f8f8f8;
+  color: #0056b3;
+}
+
+/* 특정 헤더 레벨에 대한 스타일 (예: h2) */
+.toc-h2 a {
+  font-weight: bold;
+}

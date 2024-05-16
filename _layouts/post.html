@@ -28,9 +28,8 @@ layout: table_wrappers
         {% include components/breadcrumbs.html %}
         <div id="main-content" class="main-content">
           <main>
-            {% if page.has_toc %}
-            <div class="toc">{% include toc.html html=content %}</div>
-            {% endif %}{% if site.heading_anchors != false %}
+            <!-- {% if page.toc %} {{ content | toc }} {% endif %} -->
+            {% if site.heading_anchors != false %}
             <h1><strong>{{ page.title }}</strong></h1>
             {% if page.has_children == false and page.published_date != nil %}
             작성일: {{ page.published_date }} {% endif %} {% include

@@ -119,8 +119,6 @@ footer_content: ""
 last_edit_timestamp: false # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%Y-%m-%d %H:%M" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
-
-
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: false # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub"
@@ -159,6 +157,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-github-metadata
   - jekyll-include-cache
+  - jekyll-toc
 
 kramdown:
   syntax_highlighter_opts:
@@ -169,8 +168,13 @@ compress_html:
   clippings: all
   comments: all
   endings: all
-  startings: [ ]
+  startings: []
   blanklines: false
   profile: false
   # ignore:
   #   envs: all
+
+toc:
+  min_level: 2
+  max_level: 6
+  list_type: ul

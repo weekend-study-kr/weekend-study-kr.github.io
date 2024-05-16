@@ -2,7 +2,6 @@
 layout: post
 title: 이미지 업로드 최적화
 has_children: false
-has_toc: true
 published_date: 2024-04-12
 last_modified_date: 2024-04-12
 nav_order: 1
