@@ -2,6 +2,7 @@
 layout: post
 title: 이미지 업로드 최적화
 has_children: false
+has_toc: true
 published_date: 2024-04-12
 last_modified_date: 2024-04-12
 nav_order: 1
@@ -38,8 +39,7 @@ JPG는 PNG에 비해 작은 용량의 크기로 사진을 압축할 수 있지�
 테스트 결과 -> 파일 A, 파일 B
 
 > png 파일 업로드 -> 131.2 KB, 333.5 KB <br>
-> jpeg 파일 업로드 -> 86.0 KB, 241.8 KB <br>
-> **webp 파일 업로드 -> 50.9 KB, 128.2 KB** <br>
+> jpeg 파일 업로드 -> 86.0 KB, 241.8 KB <br> > **webp 파일 업로드 -> 50.9 KB, 128.2 KB** <br>
 
 로 webp 변환 시 저장 공간에 대한 효율성을 향상시킬 수 있습니다.
 이는 업로드에 대한 성능 뿐만 아니라, 실제 클라이언트에게 이미지 파일이 전달될 때에 확실한 성능 차이가 보여질 것으로 판단됩니다.
